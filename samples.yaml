@@ -1,0 +1,8 @@
+i7_adapter: GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+samples:
+  - name: HB0265_Non_UDG_sz
+    i7_barcode: TTGACTAG
+  - name: HB0268_Non_UDG_sz
+    i7_barcode: AGAATAAG
+  - name: HB0269_Non_UDG_sz
+    i7_barcode: TTGGAGCT

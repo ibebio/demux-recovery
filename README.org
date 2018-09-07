@@ -1,0 +1,21 @@
+* Illumina demultiplexing recovery
+
+This tool is intended to perform demultiplexing when no index reads
+are available. It works by determining the minimal required barcode
+length, searching for the adapter sequence in the read and, if
+successful, attempting to match the subsequent barcode with one of the
+sample barcodes. The output is written to FASTQ files.
+
+The adapter and the sample names and barcodes are provided in a YAML
+file (samples.yaml). This file needs to be created for each
+demultiplexing run. Additional configuration for the adapter matching
+and barcode length settings is located in the file
+demux_recovery.yaml.
+
+The script requires Biopython to run, and was written with Python 3.6.
+
+
+** Example: 
+#+BEGIN_SRC bash
+./demux_recovery.py --input_fastq Undetermined_S0_L001_R1_001.fastq.gz --samples_file samples.yaml --output_dir . --log_level DEBUG
+#+END_SRC
