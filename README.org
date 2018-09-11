@@ -19,3 +19,13 @@ The script requires Biopython to run, and was written with Python 3.6.
 #+BEGIN_SRC bash
 ./demux_recovery.py --input_fastq Undetermined_S0_L001_R1_001.fastq.gz --samples_file samples.yaml --output_dir . --log_level DEBUG
 #+END_SRC
+   
+** Running in parallel
+Single-threaded usage can take a _very_ long time if there is a large
+number of reads. The tool can be run in parallel using the includes
+Snakemake pipeline. Copy the Snakefile, config.yaml and samples.yaml
+to the location of the FASTQ file, adjust the config.yaml and run
+snakemake.
+
+Cluster submission scripts for SGE are included, but will most likely
+need to be adapted.
