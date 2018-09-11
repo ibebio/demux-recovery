@@ -8,9 +8,19 @@ rule join:
     input: dynamic(directory("Demux.{splitid}"))
     output: directory("Demux")
     shell: """
-        echo {input}
-        
-        """
+    mkdir -p Demux
+    echo {input}
+    REFERENCE_DIR=$(echo {input} |cut -f 1 -d " ")
+    echo $REFERENCE_DIR
+    FASTQ_FILES=$(ls $REFERENCE_DIR/*.fastq |cut -f 2 -d "/")
+    echo $FASTQ_FILES
+    for FILE in $FASTQ_FILES ; do
+      if [ -f Demux/$FILE ] ; then
+        rm Demux/$FILE
+      fi
+      cat Demux.*/$FILE >> Demux/$FILE
+    done
+    """
 
 
 rule demux_recovery:
@@ -33,3 +43,9 @@ rule split:
     mkdir -p params.out_dir
     zcat {input} | split -d -l {params.lines_per_file} - {params.out_dir}/undemultiplexed.fastq.
     """    
+
+rule clean:
+    shell: """
+    rm -rf Demux.*
+    rm -rf Demux
+    """
